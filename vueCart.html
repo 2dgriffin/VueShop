@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Vue Shopping Cart</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+
+    <div id="vueApp">
+
+        <ul>
+            <li v-bind:html="message" >
+                {{data.items}}
+        </ul>
+
+
+    </div>
+
+    <script>
+        var app = new Vue({
+            el: "#vueApp",
+            data: {
+                items: [
+                    {name: "Stitch", ordered: "0", imgSrc: "stictch.jpg"},
+                    {name: "Dory", ordered: "0", imgSrc: "dory.png"}
+                ]
+            }
+        })
+    </script>
+</body>
+</html>
