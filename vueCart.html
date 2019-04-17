@@ -11,11 +11,18 @@
 
     <div id="vueApp">
 
-        <ul>
-            <li v-bind:html="message" >
-                {{data.items}}
-        </ul>
+        <p v-if="cartItem > 0"> Cart Items: {{cartItem}} </p>
+        <p style="font-weight:bold">Selected Item: {{itemSelected}} </p>
 
+        <div v-for="item in items">
+
+            <p> {{item.name}} </p>
+            <img v-bind:src="item.imgSrc" v-bind:alt="item.name" v-on:click="showSelected(item.name)">
+            <p v-if="item.ordered > 0"> Qty Ordered: {{item.ordered}} </p>
+            <button v-on:click="orderSomething(item)"> Order {{item.name}} </button>
+            <button v-on:click="deleteSomething(item)" v-if="item.ordered > 0"> Delete {{item.name}} </button>
+
+        </div>
 
     </div>
 
@@ -24,11 +31,26 @@
             el: "#vueApp",
             data: {
                 items: [
-                    {name: "Stitch", ordered: "0", imgSrc: "stictch.jpg"},
-                    {name: "Dory", ordered: "0", imgSrc: "dory.png"}
-                ]
+                    {name: "Stitch", ordered: 0, imgSrc: "stitch.png"},
+                    {name: "Dory", ordered: 0, imgSrc: "dory.png"}
+                ],
+                cartItem: 0,
+                itemSelected: "None Selected Yet"
+            },
+            methods: {
+                showSelected: function(theName){
+                    this.itemSelected = name;
+                },
+                orderSomething: function(anItem){
+                    anItem.ordered += 1;
+                    this.cartItem += 1;
+                },
+                deleteSomething: function(anItem){
+                    anItem.ordered -= 1;
+                    this.cartItem -= 1;
+                }
             }
-        })
+        });
     </script>
 </body>
 </html>
